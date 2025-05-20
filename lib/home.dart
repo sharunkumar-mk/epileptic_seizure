@@ -34,40 +34,32 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          InAppWebView(
-            initialUrlRequest: URLRequest(
-              url: WebUri(
-                "https://epileptic-seizure-recognition.streamlit.app",
-              ),
-            ),
-            onWebViewCreated: (controller) {
-              debugPrint("WebView Created");
-            },
+      body: InAppWebView(
+        initialUrlRequest: URLRequest(
+          url: WebUri("https://epileptic-seizure-recognition.streamlit.app"),
+        ),
+        onWebViewCreated: (controller) {
+          debugPrint("WebView Created");
+        },
 
-            onLoadStart: (controller, url) {
-              setState(() {
-                showProgress = false;
-              });
-              debugPrint("Loading started: $url");
-            },
+        onLoadStart: (controller, url) {
+          setState(() {
+            showProgress = false;
+          });
+          debugPrint("Loading started: $url");
+        },
 
-            onLoadStop: (controller, url) async {
-              debugPrint("Loading finished: $url");
-            },
+        onLoadStop: (controller, url) async {
+          debugPrint("Loading finished: $url");
+        },
 
-            onProgressChanged: (controller, progress) {
-              debugPrint("Loading progress: $progress%");
-            },
+        onProgressChanged: (controller, progress) {
+          debugPrint("Loading progress: $progress%");
+        },
 
-            onConsoleMessage: (controller, consoleMessage) {
-              debugPrint("Console: ${consoleMessage.message}");
-            },
-          ),
-          if (showProgress)
-            Expanded(child: Center(child: CircularProgressIndicator())),
-        ],
+        onConsoleMessage: (controller, consoleMessage) {
+          debugPrint("Console: ${consoleMessage.message}");
+        },
       ),
     );
   }
